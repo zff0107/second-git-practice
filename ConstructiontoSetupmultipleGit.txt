@@ -1,0 +1,38 @@
+
+Multiply Git account SETUP
+
+1. Create new account on github
+2. Unset global username and email
+	git config  - -global user.name ‘ ‘
+	git config  - -global user.email ‘ ' 
+3.生成新的ssh 公匙 
+        (1) cd ~/.ssh
+        (2) ssh-keygen -t rsa -C “new email”
+        	需要输入新的file name(默认都是id_rsa 和 id_rsa.pub) 所以需要更改不要重名
+        (3) 执行ssh-agent 让ssh 识别新的私匙
+           	ssh-add ~/.ssh/id_rsa
+	(4) 配置~/.ssh/config 文件
+         
+          	添加新的HOST到config
+      		# second user(second@mail.com)
+      		# 建一个github别名，新建的帐号使用这个别名做克隆和更新
+      		Host git@code.xxxxxxx.com
+      		HostName https://code.xxxxxxx.com    #公司的gitlab
+      		User git
+      		IdentityFile ~/.ssh/id_rsa_new
+6. 添加新的ssh到github 账号中
+7. 以新的github account 创建 repository
+      locate 到文件位置   
+ 	git init
+ 	git config user.name “ “
+ 	git config user.email “ “
+ 	git config credential.https//example.com.user.name myusername (关键一步识别第二个账号的push等动作 参考：https://git-scm.com/docs/gitcredentials)
+	 git commit -m”first commit”
+	 git remote add origin https://github.com/hereisyourusername/yourfilename.git(可登陆github 点击你的repostory 查看setup步骤)
+ 	git push -u origin master
+ 
+ 
+ 
+        
+ 
+
